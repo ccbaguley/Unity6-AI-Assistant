@@ -14,3 +14,33 @@ No internet required. Includes optional quick-fix patches for safe patterns.
 
 ## Extend
 Implement `IAssistantBackend` for your own AI or service; default backend is local rules.
+
+## EDITS REQUIRED
+✅ Why this happened
+
+The zip unpacked as:
+
+Unity_Clippy_Assistant/
+  Assets/
+    ClippyAssistant/
+      Editor/*.cs
+
+
+Then Unity compiled that entire nested Assets folder as part of the project, because anything named Assets/ inside any folder is treated like another root.
+
+Unity treats every folder named Assets as part of the main project compilation domain.
+
+So you ended up with:
+
+Assets/ClippyAssistant/Editor/*.cs
+
+Assets/Unity_Clippy_Assistant/Assets/ClippyAssistant/Editor/*.cs
+
+Both visible to Unity.
+
+✅ Solution summary
+
+✅ Remove one of the two folders
+✅ Keep only this:
+
+Assets/ClippyAssistant/Editor/*.cs
